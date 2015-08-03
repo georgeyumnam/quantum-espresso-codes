@@ -1,0 +1,381 @@
+#!/bin/bash
+
+echo "###################################################################################################"
+echo "#                               Band structure and DOS calculation script                         #"
+echo "#                             *********************************************                       #"
+echo "#                                                                                                 #"
+echo "#                       Created by: George Yumnam (UG, Materials Science)                         #"
+echo "#                                   Materials Research Centre                                     #"
+echo "#                                   Indian Institute of Science, Bangalore                        #"
+echo "###################################################################################################"
+
+
+# This script is meant to perform the band structure calculation.
+
+PREFIX="graphene"
+
+ELEMENT="C"
+
+MPIRUN="mpirun.openmpi"
+
+ESPRESSO_PW="pw.x"
+
+ESPRESSO_DOS="dos.x"
+
+k=9
+
+ECUT=80 # enter in Ry
+
+OPT_LATT=4.65
+
+UPF_FILE="C.pbe-rrkjus.UPF"
+
+mkdir 4_BAND_STRUCT
+cd 4_BAND_STRUCT
+cp ../$UPF_FILE .
+
+echo " "
+echo "Now creating the input files for SCF calculations."
+echo " "
+
+# Create *.scf.in file to perform SCF calculation.
+cat>$PREFIX.scf.in<<EOF
+ &CONTROL
+                 calculation = 'scf' ,
+                restart_mode = 'from_scratch' ,
+                      outdir = './' ,
+                  pseudo_dir = './' ,
+                      prefix = '$PREFIX' ,
+ /
+ &SYSTEM
+                       ibrav = 0,
+                   celldm(1) = $OPT_LATT,
+                         nat = 2,
+                        ntyp = 1,
+                     ecutwfc = $ECUT ,
+                     ecutrho = 600.0 ,
+                        nbnd = 8,
+                 occupations = 'smearing' ,
+                     degauss = 0.001 ,
+ /
+ &ELECTRONS
+            electron_maxstep = 100,
+                    conv_thr = 1.0d-8 ,
+                 mixing_mode = 'plain' ,
+                 mixing_beta = 0.7 ,
+             diagonalization = 'david' ,
+ /
+CELL_PARAMETERS alat
+     1.000000000    0.000000000    0.000000000
+     0.500000000    0.866025400    0.000000000
+     0.000000000    0.000000000   12.000000000
+ATOMIC_SPECIES
+    C   12.00000  $UPF_FILE
+ATOMIC_POSITIONS alat
+    C      0.000000000    0.000000000    0.000000000
+    C      1.000000000    0.577350300    0.000000000
+K_POINTS automatic
+  $k $k 1   0 0 0
+EOF
+
+echo "Now running the SCF calculation !!!"
+echo " "
+
+$MPIRUN -np 4  $ESPRESSO_PW  < $PREFIX.scf.in > $PREFIX.scf.out
+
+echo "Completed SCF calculation. Now starting bands calculation."
+echo " "
+# Create *.band.in file to perform the band structure calculation by making
+# use of self-consistent charge density from the previous SCF calculation.
+
+cat>$PREFIX.band.in<<EOF
+&CONTROL
+                 calculation = 'bands' ,
+                restart_mode = 'from_scratch' ,
+                      outdir = './' ,
+                  pseudo_dir = './' ,
+                      prefix = '$PREFIX' ,
+                   verbosity = 'low' ,
+ /
+ &SYSTEM
+                       ibrav = 0,
+                   celldm(1) = $OPT_LATT,
+                         nat = 2,
+                        ntyp = 1,
+                     ecutwfc = $ECUT ,
+		     ecutrho = 600,
+                 occupations = 'smearing' ,
+                     degauss = 0.003 ,
+			nbnd = 15 ,
+ /
+ &ELECTRONS
+	    electron_maxstep = 100,
+                    conv_thr = 1.0d-8 ,
+                 mixing_mode = 'plain' ,
+                 mixing_beta = 0.7 ,
+             diagonalization = 'david' ,
+ /
+CELL_PARAMETERS alat
+     1.000000000    0.000000000    0.000000000
+     0.500000000    0.866025400    0.000000000
+     0.000000000    0.000000000   12.000000000
+ATOMIC_SPECIES
+    $ELEMENT   12.00000  $UPF_FILE
+ATOMIC_POSITIONS alat
+    $ELEMENT      0.000000000    0.000000000    0.000000000
+    $ELEMENT      1.000000000    0.577350300    0.000000000
+K_POINTS 
+ 90
+   0.00000000  0.00000000  0.00000000       0.011
+   0.01724138  0.00995438  0.00000000       0.011
+   0.03448276  0.01990875  0.00000000       0.011
+   0.05172414  0.02986313  0.00000000       0.011
+   0.06896552  0.03981751  0.00000000       0.011
+   0.08620690  0.04977189  0.00000000       0.011
+   0.10344828  0.05972626  0.00000000       0.011
+   0.12068966  0.06968064  0.00000000       0.011
+   0.13793103  0.07963502  0.00000000       0.011
+   0.15517241  0.08958939  0.00000000       0.011
+   0.17241379  0.09954377  0.00000000       0.011
+   0.18965517  0.10949815  0.00000000       0.011
+   0.20689655  0.11945253  0.00000000       0.011
+   0.22413793  0.12940690  0.00000000       0.011
+   0.24137931  0.13936128  0.00000000       0.011
+   0.25862069  0.14931566  0.00000000       0.011
+   0.27586207  0.15927003  0.00000000       0.011
+   0.29310345  0.16922441  0.00000000       0.011
+   0.31034483  0.17917879  0.00000000       0.011
+   0.32758621  0.18913316  0.00000000       0.011
+   0.34482759  0.19908754  0.00000000       0.011
+   0.36206897  0.20904192  0.00000000       0.011
+   0.37931034  0.21899630  0.00000000       0.011
+   0.39655172  0.22895067  0.00000000       0.011
+   0.41379310  0.23890505  0.00000000       0.011
+   0.43103448  0.24885943  0.00000000       0.011
+   0.44827586  0.25881380  0.00000000       0.011
+   0.46551724  0.26876818  0.00000000       0.011
+   0.48275862  0.27872256  0.00000000       0.011
+   0.50000000  0.28867694  0.00000000       0.011
+   0.50000000  0.28867694  0.00000000       0.011
+   0.49425287  0.29863131  0.00000000       0.011
+   0.48850574  0.30858569  0.00000000       0.011
+   0.48275862  0.31854006  0.00000000       0.011
+   0.47701149  0.32849444  0.00000000       0.011
+   0.47126436  0.33844881  0.00000000       0.011
+   0.46551723  0.34840319  0.00000000       0.011
+   0.45977011  0.35835756  0.00000000       0.011
+   0.45402298  0.36831194  0.00000000       0.011
+   0.44827585  0.37826631  0.00000000       0.011
+   0.44252872  0.38822069  0.00000000       0.011
+   0.43678160  0.39817506  0.00000000       0.011
+   0.43103447  0.40812944  0.00000000       0.011
+   0.42528734  0.41808381  0.00000000       0.011
+   0.41954021  0.42803819  0.00000000       0.011
+   0.41379309  0.43799256  0.00000000       0.011
+   0.40804596  0.44794694  0.00000000       0.011
+   0.40229883  0.45790131  0.00000000       0.011
+   0.39655170  0.46785569  0.00000000       0.011
+   0.39080458  0.47781006  0.00000000       0.011
+   0.38505745  0.48776444  0.00000000       0.011
+   0.37931032  0.49771881  0.00000000       0.011
+   0.37356319  0.50767319  0.00000000       0.011
+   0.36781607  0.51762756  0.00000000       0.011
+   0.36206894  0.52758194  0.00000000       0.011
+   0.35632181  0.53753631  0.00000000       0.011
+   0.35057468  0.54749069  0.00000000       0.011
+   0.34482756  0.55744506  0.00000000       0.011
+   0.33908043  0.56739944  0.00000000       0.011
+   0.33333330  0.57735381  0.00000000       0.011
+   0.33333330  0.57735381  0.00000000       0.011
+   0.32183905  0.55744506  0.00000000       0.011
+   0.31034480  0.53753631  0.00000000       0.011
+   0.29885054  0.51762756  0.00000000       0.011
+   0.28735629  0.49771881  0.00000000       0.011
+   0.27586204  0.47781005  0.00000000       0.011
+   0.26436779  0.45790130  0.00000000       0.011
+   0.25287354  0.43799255  0.00000000       0.011
+   0.24137929  0.41808380  0.00000000       0.011
+   0.22988503  0.39817504  0.00000000       0.011
+   0.21839078  0.37826629  0.00000000       0.011
+   0.20689653  0.35835754  0.00000000       0.011
+   0.19540228  0.33844879  0.00000000       0.011
+   0.18390803  0.31854004  0.00000000       0.011
+   0.17241378  0.29863128  0.00000000       0.011
+   0.16091952  0.27872253  0.00000000       0.011
+   0.14942527  0.25881378  0.00000000       0.011
+   0.13793102  0.23890503  0.00000000       0.011
+   0.12643677  0.21899627  0.00000000       0.011
+   0.11494252  0.19908752  0.00000000       0.011
+   0.10344827  0.17917877  0.00000000       0.011
+   0.09195401  0.15927002  0.00000000       0.011
+   0.08045976  0.13936127  0.00000000       0.011
+   0.06896551  0.11945251  0.00000000       0.011
+   0.05747126  0.09954376  0.00000000       0.011
+   0.04597701  0.07963501  0.00000000       0.011
+   0.03448276  0.05972626  0.00000000       0.011
+   0.02298850  0.03981750  0.00000000       0.011
+   0.01149425  0.01990875  0.00000000       0.011
+   0.00000000  0.00000000  0.00000000       0.011
+EOF
+
+$MPIRUN -np 4 $ESPRESSO_PW < $PREFIX.band.in > $PREFIX.band.out
+
+#############################################################################
+#       			PART - 2				    #
+#############################################################################
+echo " "
+echo "Generating the file $PREFIX.band.out now!!!"
+
+fname="$PREFIX.band.out"
+#
+
+echo " "
+echo "Creating the file 'test.dat' now!!!"
+echo " "
+echo "`sed -n '/ band energies (ev)/,+3p' $fname`" >> test.dat
+# This extracts the data corresponding to the pattern 'band energies (ev)'
+# and prints that line and 2 lines below that line (+2p) into a file named test.dat
+echo "Now giving a finishing touch to the file and generating 'bands.dat' now!"
+sed '/^$/d' test.dat>>bands.dat
+# This deletes the spaces between the lines in the file test.dat and writes
+# the output to bands.dat
+rm test.dat
+echo " "
+echo "Removed the 'test.dat' file"
+#############################################################################
+#       			PART - 3
+#############################################################################
+
+n=$(wc -l < bands.dat) #Total number of lines generated in the temporary file.
+
+for ((i=1 ; i<=$n ; i++));
+do
+        line[$i]=$(awk 'NR=='$[i]'' bands.dat)
+done
+
+m=`expr $n / 3`
+
+#j=1
+k=2
+l=3
+echo " "
+echo "Now generating the final files."
+echo " "
+
+echo "Preparing a temperary file 'kx_ky_kz' for auxiliary support!"
+echo " "
+grep "k = " ./bands.dat | awk '{printf "%6.4f %6.4f %6.4f\n", $3, $4, $5}' >> kx_ky_kz
+a=0
+b=0
+c=0
+dist=0
+
+echo "Now the following are the K-points in the mesh and the corresponding distance."
+echo " "
+
+for ((i=1 ; i<=$m ; i++));
+do 
+	kx[$i]=$(awk 'NR=='$i' {printf "%8.5f", $1}' kx_ky_kz)
+	ky[$i]=$(awk 'NR=='$i' {printf "%8.5f", $2}' kx_ky_kz)
+	kz[$i]=$(awk 'NR=='$i' {printf "%8.5f", $3}' kx_ky_kz)
+	x=${kx[$i]}
+        y=${ky[$i]}
+        z=${kz[$i]}
+	dist1=`echo "scale=16; sqrt( ($a-$x)^2 + ($b-$y)^2 + ($c-$z)^2 )" | bc`
+	dist=`echo "scale=16; $dist + $dist1" | bc`
+	distance[$i]=$dist
+	echo "x= " $x " y= " $y " z= " $z " --->> " $dist
+	echo " "
+        a=$x
+        b=$y
+        c=$z
+done
+
+for ((i=1 ; i<=$m ; i++));
+do
+        line1[$i]=${line[$k]}
+        line2[$i]=${line[$l]}
+        k=`expr $k + 3`
+        l=`expr $l + 3`
+done
+
+echo "Now the final file is beging generated!!! --->> (-_-) <<--- Stay tuned!!!"
+echo " "
+for ((i=1 ; i<=$m ; i++));
+do
+	dist=${distance[$i]}
+        line3=${line1[$i]}${line2[$i]}
+	echo $dist \ \ $line3
+        echo $dist \ \ $line3 >> $PREFIX.band.dat
+done
+rm bands.dat
+rm kx_ky_kz
+echo " "
+echo "Now generating the Band diagram using 'Xmgrace'"
+echo " "
+xmgrace -free -nxy $PREFIX.band.dat
+ 
+##############################################################################
+#				DOS calculation				     #
+##############################################################################
+echo " "
+echo "Now Initiating the DOS calculation."
+echo " "
+echo "Creating the input file for DOS calculation."
+cat>$PREFIX.dos.in<<EOF
+&DOS
+                      prefix = '$PREFIX' ,
+                      outdir = './' ,
+                      fildos = '$PREFIX.dos_without_fermi.dat' ,
+                      ngauss = 0 ,
+                     degauss = 0.003 ,
+                      DeltaE = 0.01 ,
+ /
+EOF
+echo " "
+echo "Now running the DOS calculation!!"
+echo " "
+$MPIRUN -np 4 $ESPRESSO_DOS < $PREFIX.dos.in > $PREFIX.dos.out
+
+fermi=`grep "Fermi" * | awk '{printf "%6.4f\n", $6}'`
+
+nn=$(wc -l < $PREFIX.dos_without_fermi.dat)
+
+for ((i=1 ; i<=$nn ; i++));
+do
+	if (( i > 1 ));
+	then
+        energy[$i]=$(awk 'NR=='$i' {printf "%8.16f", $1}' $PREFIX.dos_without_fermi.dat)
+	DOS[$i]=$(awk 'NR=='$i' {printf "%8.16f", $2}' $PREFIX.dos_without_fermi.dat)
+	Int_DOS[$i]=$(awk 'NR=='$i' {printf "%8.16f", $3}' $PREFIX.dos_without_fermi.dat)
+	ene=${energy[$i]}
+	energy=`echo "scale=20; $ene - $fermi" | bc`
+	DOS=${DOS[$i]}
+	Int_DOS=${Int_DOS[$i]}
+	echo " "
+	echo $energy \ \ $DOS \ \ $Int_DOS 
+	fi
+	echo $energy \ \ $DOS \ \ $Int_DOS >> $PREFIX.dos_with_fermi.dat
+done
+
+echo " "
+echo " "
+echo "Now generating the DOS plot using 'Xmgrace'"
+echo " "
+
+xmgrace -free -nxy $PREFIX.dos_with_fermi.dat
+
+##############################################################################
+cd ../
+##############################################################################
+
+echo " "
+echo " "
+echo "############################################################################## "
+echo "############################################################################## "
+echo "##                   Finally the computation is done now!!!                 ## " 
+echo "##                                 BYE BYE!!!                               ## "
+echo "############################################################################## "
+echo "############################################################################## "
+echo " "
+echo " "

@@ -1,0 +1,32 @@
+#####################################################################################
+#			 	README - SCF calculation			    #
+#										    # 
+#			Created by: George Yumnam (UG, Materials Science)           # 
+#				    Materials Research Centre			    #
+#				    Indian Institute of Science, Bangalore	    #
+#####################################################################################
+
+To run the SCF calculation.
+
+1) Prepare the input file and name it with the extension '.in'
+
+2) This can be done by using the GUI --> pwgui
+
+*** An input file has been included for reference.
+
+3) Then after the creation of the input file, run the SCF by using the following command.
+
+	pw.x < Cu.scf.in > Cu.scf.out
+
+4) Here the output is generated and printed in the file 'Cu.scf.out'
+
+		***************************
+
+PS: Depending on your machine, please include the mpirun before the above command.
+    The general mpirun command looks like the following:
+
+			mpirun -np 4 
+
+    Followed by the above command.
+
+######################################################################################

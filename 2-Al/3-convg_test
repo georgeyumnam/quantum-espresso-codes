@@ -1,0 +1,159 @@
+#!/bin/bash/
+
+echo "###################################################################################################"
+echo "#                                       Convergence test script                                   #"
+echo "#                                     ***************************                                 #"
+echo "#                                                                                                 #"
+echo "#                       Created by: George Yumnam (UG, Materials Science)                         #"
+echo "#                                   Materials Research Centre                                     #"
+echo "#                                   Indian Institute of Science, Bangalore                        #"
+echo "###################################################################################################"
+
+# This script is meant for performing the convergence test in terms of energy
+# It aims to find the minimum value of 'ecutwfc' and 'k-grid' required for the calculation,
+# without compromising the energy calculation. Hence optimizing the calculation.
+
+PREFIX="Al"
+
+ELEMENT="Al"
+
+MPIRUN="mpirun.openmpi"
+
+ESPRESSO_PW="pw.x"
+
+UPF_FILE="Al.pbe-n-kjpaw_psl.0.1.UPF"
+
+ECUTT="55 60 65 70 75 80 85 90 95 100 105 110"
+
+KGRID="07 08 09 10 11 12 13 14 15 16"
+
+mkdir 3_CONVG_TEST
+cp $UPF_FILE 3_CONVG_TEST
+cd 3_CONVG_TEST
+
+mkdir ecut_vs_ENE
+mkdir kpt_vs_ENE
+
+for ecut in $ECUTT
+do
+	echo " "
+	echo "Calculating the energy for crystal structure with 'ecutwfc' = "$ecut
+
+for k in $KGRID
+do
+	echo " "
+	echo "      Calculation running for k-mesh = "$k $k $k 
+	mkdir $PREFIX.$ecut.$k
+	cp $UPF_FILE $PREFIX.$ecut.$k
+	cd $PREFIX.$ecut.$k
+	echo " "
+	echo "      Entering the directory: "$PREFIX.$ecut.$k
+	echo " "
+	echo "      Now writing the input file!!!"
+	echo " "
+	cat > $PREFIX.scf.ecut_$ecut.k_$k.in<< EOF
+ &CONTROL
+                 calculation = 'scf' ,
+                restart_mode = 'from_scratch' ,
+                      outdir = './' ,
+                  pseudo_dir = './' ,
+                      prefix = '$PREFIX' ,
+                   verbosity = 'low' ,
+ /
+ &SYSTEM
+                       ibrav = 2,
+                   celldm(1) = 7.63,
+                         nat = 1,
+                        ntyp = 1,
+                     ecutwfc = $ecut ,
+		 occupations = 'smearing' ,
+		    smearing = 'gaussian' ,
+		     degauss = 0.003
+ /
+ &ELECTRONS
+                    conv_thr = 1d-07 ,
+                 mixing_mode = 'plain' ,
+                 mixing_beta = 0.7 ,
+             diagonalization = 'david' ,
+ /
+ATOMIC_SPECIES
+   $ELEMENT  26.9815385   $UPF_FILE
+ATOMIC_POSITIONS alat
+   $ELEMENT      0.000000000    0.000000000    0.000000000
+K_POINTS automatic
+  $k $k $k 0 0 0
+EOF
+	echo "      Now calculating the energy of this crystal structure!"
+	echo "      Generating -->> "$ELEMENT.scf.ecut_$ecut.k_$k.out
+
+	$MPIRUN -np 4 $ESPRESSO_PW < $ELEMENT.scf.ecut_$ecut.k_$k.in > $ELEMENT.scf.ecut_$ecut.k_$k.out
+	rm -rf *.save *.wfc* $UPF_FILE
+	
+	echo " "
+	echo " "
+
+	total_energy=`grep "!    total" $PREFIX.scf.ecut_$ecut.k_$k.out | awk '{printf "%15.9f\n",$5}'`
+	num_k_points=`grep "number of k points" $PREFIX.scf.ecut_$ecut.k_$k.out | awk '{printf "%4d\n", $5}'`
+
+	cd ../
+
+	cd ecut_vs_ENE
+	echo $ecut   $total_energy >> at_${k}x${k}x${k}
+	cd ../
+
+	cd kpt_vs_ENE
+	echo $num_k_points    $total_energy >> at_ecutwfc_$ecut
+	cd ../
+
+	echo " "
+	echo "***************************************************"
+	echo "***************************************************"
+	echo "********* DONE - iteration - ecut - " $ecut " **********"
+	echo "********* DONE - iteration -  k   - " $k " **********"
+	echo "***************************************************"
+	echo "***************************************************"
+done
+done 
+
+# The following code is meant for plotting the energy convergence using Xmgrace
+# If you don't have Xmgrace installed in your system, the first install it
+# Otherwise, Please comment out the following lines
+echo " "
+echo " "
+echo "******************************************************************************"
+echo "******************************************************************************"
+echo "********* DONE - CALCULATION - INITIATING XMGRACE FOR PLOTTING ***************"
+echo "******************************************************************************"
+echo "******************************************************************************"
+echo " "
+echo " "
+echo "Plotting diagram now!!!"
+cd ecut_vs_ENE
+echo " "
+echo "First plotting the 'ecut' vs 'Total energy' "
+xmgrace -free -nxy *
+cd ../kpt_vs_ENE
+echo "Now, plotting the 'K-point' vs 'Total energy'"
+xmgrace -free -nxy *
+cd ..
+
+echo " "
+echo " "
+echo "******************************************************************************"
+echo "******************************************************************************"
+echo "********************** DONE - PLOTTING - EXITING XMGRACE *********************"
+echo "******************************************************************************"
+echo "******************************************************************************"
+echo " "
+
+echo " "
+echo " "
+echo "############################################################################## "
+echo "############################################################################## "
+echo "##                   Finally the computation is done now!!!                 ## " 
+echo "##                                 BYE BYE!!!                               ## "
+echo "############################################################################## "
+echo "############################################################################## "
+
+echo " "
+echo " "

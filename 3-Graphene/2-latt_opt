@@ -1,0 +1,126 @@
+#!/bin/bash/
+
+echo "###################################################################################################"
+echo "#                                    Lattice optimization script                                  #"
+echo "#                                   *****************************                                 #"
+echo "#                                                                                                 #"
+echo "#                       Created by: George Yumnam (UG, Materials Science)                         #"
+echo "#                                   Materials Research Centre                                     #"
+echo "#                                   Indian Institute of Science, Bangalore                        #"
+echo "###################################################################################################"
+
+PREFIX="graphene"
+
+ELEMENT="C"
+
+MPIRUN="mpirun.openmpi"
+
+ESPRESSO_PW="pw.x"
+
+UPF_FILE="C.pbe-rrkjus.UPF"
+
+# This script is meant for optimizing the lattice parameters of graphene as designed.
+mkdir 2_LATT_OPT
+cp $UPF_FILE 2_LATT_OPT
+cd 2_LATT_OPT
+
+LATT="4.60 4.61 4.62 4.63 4.64 4.65 4.66 4.67 4.68 4.69 4.70"
+
+for lat in $LATT
+do
+	echo " "
+	echo "Calculating the energy for crystal structure with Lattice parameter = "$lat 
+	mkdir latt.$lat
+	cp $UPF_FILE latt.$lat
+	cd latt.$lat
+	echo " "
+	echo "Entering the directory: latt."$lat
+	echo " "
+	echo "Now writing the input file!!!"
+	echo " "
+	cat > $PREFIX.scf.latt_$lat.in<< EOF
+&CONTROL
+                 calculation = 'scf' ,
+                restart_mode = 'from_scratch' ,
+                      outdir = './' ,
+                  pseudo_dir = './' ,
+                      prefix = '$PREFIX' ,
+ /
+ &SYSTEM
+                       ibrav = 0,
+                   celldm(1) = $lat,
+                         nat = 2,
+                        ntyp = 1,
+                     ecutwfc = 70.0 ,
+                     ecutrho = 560.0 ,
+                        nbnd = 8,
+                 occupations = 'smearing' ,
+                     degauss = 0.001 ,
+ /
+ &ELECTRONS
+            electron_maxstep = 100,
+                    conv_thr = 1.0d-8 ,
+                 mixing_mode = 'plain' ,
+                 mixing_beta = 0.7 ,
+             diagonalization = 'david' ,
+ /
+CELL_PARAMETERS alat
+     1.000000000    0.000000000    0.000000000
+     0.500000000    0.866025400    0.000000000
+     0.000000000    0.000000000   12.000000000
+ATOMIC_SPECIES
+    $ELEMENT   12.00000  $UPF_FILE
+ATOMIC_POSITIONS alat
+    $ELEMENT      0.000000000    0.000000000    0.000000000
+    $ELEMENT      1.000000000    0.577350300    0.000000000
+K_POINTS automatic
+  10 10 1   0 0 0
+
+EOF
+	echo "Now calculating the energy of this crystal structure!"
+	echo "Generating -->> $PREFIX.scf.latt_$lat.out"
+	$MPIRUN -np 4 $ESPRESSO_PW < $PREFIX.scf.latt_$lat.in > $PREFIX.scf.latt_$lat.out
+	echo " "
+	rm -rf $PREFIX.save *.wfc* $UPF_FILE
+	cd ../
+
+	tot_en=`grep "!    total energy" ./latt.$lat/$PREFIX.scf.latt_$lat.out | awk '{printf "%15.12f\n",$5}'`
+	echo "Finally, The total energy for the respective lattice parameter is:"
+	echo " "
+	echo $lat "<------> " $tot_en
+	echo "$lat $tot_en" >> $PREFIX.latt_opt.dat
+	echo " "
+	echo " "
+	echo "***************************************************"
+	echo "***************************************************"
+	echo "********* DONE - iteration - " $lat " ***************"
+	echo "***************************************************"
+	echo "***************************************************"
+done
+
+# The following code is meant for plotting the lattice optimation using Xmgrace
+# If you don't have Xmgrace installed in your system, the first install it
+# Otherwise, Please comment out the following lines
+echo " "
+echo " "
+echo "******************************************************************************"
+echo "******************************************************************************"
+echo "********* DONE - CALCULATION - INITIATING XMGRACE FOR PLOTTING ***************"
+echo "******************************************************************************"
+echo "******************************************************************************"
+echo " "
+echo " "
+echo "Plotting diagram now!!!"
+
+xmgrace -free -nxy $PREFIX.latt_opt.dat
+
+echo " "
+echo " "
+echo "############################################################################## "
+echo "############################################################################## "
+echo "##                   Finally the computation is done now!!!                 ## " 
+echo "##                                 BYE BYE!!!                               ## "
+echo "############################################################################## "
+echo "############################################################################## "
+echo " "
+echo " "

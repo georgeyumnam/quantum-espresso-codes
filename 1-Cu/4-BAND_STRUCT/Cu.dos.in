@@ -1,0 +1,8 @@
+&DOS
+                      prefix = 'Cu' ,
+                      outdir = './' ,
+                      fildos = 'Cu.dos.dat' ,
+                      ngauss = 0 ,
+                     degauss = 0.003 ,
+                      DeltaE = 0.001 ,
+ /
