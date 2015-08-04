@@ -790,22 +790,22 @@ F
          1
     </GRANULARITY_OF_K-POINTS_DISTRIBUTION>
     <NUMBER_OF_PROCESSORS type="integer" size="1">
-         4
+         1
     </NUMBER_OF_PROCESSORS>
     <NUMBER_OF_PROCESSORS_PER_POOL type="integer" size="1">
-         4
+         1
     </NUMBER_OF_PROCESSORS_PER_POOL>
     <NUMBER_OF_PROCESSORS_PER_IMAGE type="integer" size="1">
-         4
+         1
     </NUMBER_OF_PROCESSORS_PER_IMAGE>
     <NUMBER_OF_PROCESSORS_PER_TASKGROUP type="integer" size="1">
          0
     </NUMBER_OF_PROCESSORS_PER_TASKGROUP>
     <NUMBER_OF_PROCESSORS_PER_POT type="integer" size="1">
-         4
+         1
     </NUMBER_OF_PROCESSORS_PER_POT>
     <NUMBER_OF_PROCESSORS_PER_BAND_GROUP type="integer" size="1">
-         4
+         1
     </NUMBER_OF_PROCESSORS_PER_BAND_GROUP>
     <NUMBER_OF_PROCESSORS_PER_DIAGONALIZATION type="integer" size="1">
          1
@@ -836,7 +836,7 @@ F
     <UNITS_FOR_K-POINTS UNITS="2 pi / a"/>
     <UNITS_FOR_ENERGIES UNITS="Hartree"/>
     <FERMI_ENERGY type="real" size="1">
- 1.145717812531795E+000
+ 1.145719583093466E+000
     </FERMI_ENERGY>
   </BAND_STRUCTURE_INFO>
   <EIGENVALUES>

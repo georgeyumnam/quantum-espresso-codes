@@ -27,7 +27,8 @@ There are 3 main scripts which are executable, namely: (along with their functio
                 parameters, Hence we can visually determine which lattice parameter has the minimum energy.
                 
   b) 3-convg_test: Computes the SCF calculation for different values 'ecutwfc' and 'KPOINTS' tags in the 
-                   quantum espresso input file. Hence, plotting the total energy against both the different                           K-points as well as the different ecutwfc, through XMGRACE. Hence, we can determine on which
+                   quantum espresso input file. Hence, plotting the total energy against both the different
+                   K-points as well as the different ecutwfc, through XMGRACE. Hence, we can determine on which
                    lowest value does the convergence takes place. This is important because, we can save
                    computational power and time if the calculation is performed with lower values.
   
