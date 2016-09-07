@@ -1,0 +1,30 @@
+#!/usr/bin/python
+# Run this command as follows:
+# ./*.py PREFIX
+#
+import xml.etree.ElementTree as ET
+import glob
+import sys
+ 
+prefix = "al"
+savedir = prefix + ".save"
+CBM = 100000
+VBM = -100000
+for i in glob.glob(savedir + "/K*"):
+    datafile = i + "/eigenval.xml"
+    tree = ET.parse(datafile)
+    root = tree.getroot()
+    eig = root[2].text
+    eig_vec = [s for s in eig.splitlines()]
+    occup = root[3].text
+    occup_vec = [s for s in occup.splitlines()]
+    for j in range(len(occup_vec)):
+        if float(occup_vec[j+1]) == 0: break
+    CBMt = float(eig_vec[j+1])
+    VBMt = float(eig_vec[j])
+    if CBMt < CBM: CBM = CBMt
+    if VBMt > VBM: VBM = VBMt
+ 
+print "CBM:\t",CBM*27.211396132
+print "VBM:\t",VBM*27.211396132
+print "Bandgap:\t",(CBM - VBM)*27.211396132

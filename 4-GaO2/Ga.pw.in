@@ -1,0 +1,41 @@
+&CONTROL
+calculation = 'scf' ,
+outdir = './' ,
+pseudo_dir = './' ,
+prefix = 'gallium' ,
+tprnfor = .true. ,
+tstress = .true. ,
+/
+&SYSTEM
+ibrav = 0 ,
+nat = 10 ,
+ntyp = 2 ,
+ecutwfc = 125 ,
+ecutrho = 500 ,
+/
+&ELECTRONS
+conv_thr = 1.0D-5 ,
+mixing_mode = 'plain' ,
+mixing_beta = 0.7 ,
+diagonalization = 'david' ,
+/
+ATOMIC_SPECIES
+Ga 	69.72300	Ga.rel-pbesol-dn-kjpaw_psl.0.2.UPF
+O  	15.99400	O.rel-pbesol-n-rrkjus_psl.0.1.UPF
+CELL_PARAMETERS angstrom
+6.140772 	1.526414 	0.000000
+−6.140772 	1.526414	0.000000
+−1.373705 	0.000000 	5.647819
+ATOMIC_POSITIONS crystal
+Ga 0.090205	0.909795	0.795150
+Ga 0.909795	0.090205	0.204850
+Ga 0.341246 	0.658754 	0.686176
+Ga 0.658754 	0.341246	0.313824
+O  0.164976 	0.835024 	0.109066
+O  0.835024 	0.164976 	0.890934
+O  0.496196 	0.503804 	0.256088
+O  0.503804 	0.496196 	0.743912
+O  0.826745 	0.173255 	0.436734
+O  0.173255 	0.826745 	0.563266
+K_POINTS automatic
+8 8 4 0 0 0

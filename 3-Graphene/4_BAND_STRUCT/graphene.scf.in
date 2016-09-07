@@ -10,7 +10,7 @@
                    celldm(1) = 4.65,
                          nat = 2,
                         ntyp = 1,
-                     ecutwfc = 70 ,
+                     ecutwfc = 80 ,
                      ecutrho = 600.0 ,
                         nbnd = 8,
                  occupations = 'smearing' ,

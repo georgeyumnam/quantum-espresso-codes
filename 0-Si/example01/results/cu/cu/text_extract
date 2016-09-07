@@ -1,0 +1,15 @@
+#!/bin/bash
+# Script to extract the data from the Si.bands.out file
+# for plotting the band structure of Silicon.
+
+fname="cu.scf.out"
+#
+echo "`sed -n '/ bands (ev)/,+2p' $fname`" >> test.dat
+# This extracts the data corresponding to the pattern 'band energies (ev)'
+# and prints that line and 2 lines below that line (+2p) into a file named test.dat
+
+sed '/^$/d' test.dat>>bands.dat
+# This deletes the spaces between the lines in the file test.dat and writes
+# the output to bands.dat
+
+rm test.dat

@@ -402,13 +402,13 @@ F
   <PLANE_WAVES>
     <UNITS_FOR_CUTOFF UNITS="Hartree"/>
     <WFC_CUTOFF type="real" size="1">
- 3.500000000000000E+001
+ 4.000000000000000E+001
     </WFC_CUTOFF>
     <RHO_CUTOFF type="real" size="1">
  3.000000000000000E+002
     </RHO_CUTOFF>
     <MAX_NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10382
+     12773
     </MAX_NUMBER_OF_GK-VECTORS>
     <GAMMA_ONLY type="logical" size="1">
 F
@@ -417,9 +417,9 @@ F
     <GVECT_NUMBER type="integer" size="1">
     258975
     </GVECT_NUMBER>
-    <SMOOTH_FFT_GRID nr1s="25" nr2s="25" nr3s="300"/>
+    <SMOOTH_FFT_GRID nr1s="27" nr2s="27" nr3s="320"/>
     <SMOOTH_GVECT_NUMBER type="integer" size="1">
-     82857
+    100883
     </SMOOTH_GVECT_NUMBER>
     <SMALLBOX_FFT_GRID nr1b="40" nr2b="40" nr3b="450"/>
   </PLANE_WAVES>
@@ -732,7 +732,7 @@ F
     <UNITS_FOR_K-POINTS UNITS="2 pi / a"/>
     <UNITS_FOR_ENERGIES UNITS="Hartree"/>
     <FERMI_ENERGY type="real" size="1">
--1.083631570521349E-001
+-1.083638497367010E-001
     </FERMI_ENERGY>
   </BAND_STRUCTURE_INFO>
   <EIGENVALUES>
@@ -1729,456 +1729,456 @@ F
   </EIGENVALUES>
   <EIGENVECTORS>
     <MAX_NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10382
+     12773
     </MAX_NUMBER_OF_GK-VECTORS>
     <K-POINT.1>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10361
+     12735
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.1>
     <K-POINT.2>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10371
+     12763
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.2>
     <K-POINT.3>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10371
+     12773
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.3>
     <K-POINT.4>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10367
+     12761
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.4>
     <K-POINT.5>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10367
+     12751
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.5>
     <K-POINT.6>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10323
+     12761
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.6>
     <K-POINT.7>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10313
+     12755
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.7>
     <K-POINT.8>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10313
+     12751
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.8>
     <K-POINT.9>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10313
+     12723
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.9>
     <K-POINT.10>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10301
+     12713
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.10>
     <K-POINT.11>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10305
+     12679
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.11>
     <K-POINT.12>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10287
+     12675
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.12>
     <K-POINT.13>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10287
+     12675
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.13>
     <K-POINT.14>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10301
+     12645
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.14>
     <K-POINT.15>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10321
+     12639
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.15>
     <K-POINT.16>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10329
+     12609
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.16>
     <K-POINT.17>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10335
+     12610
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.17>
     <K-POINT.18>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10327
+     12602
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.18>
     <K-POINT.19>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10311
+     12610
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.19>
     <K-POINT.20>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10289
+     12624
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.20>
     <K-POINT.21>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10309
+     12600
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.21>
     <K-POINT.22>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10323
+     12598
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.22>
     <K-POINT.23>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10348
+     12588
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.23>
     <K-POINT.24>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10348
+     12590
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.24>
     <K-POINT.25>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10346
+     12588
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.25>
     <K-POINT.26>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10354
+     12572
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.26>
     <K-POINT.27>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10354
+     12564
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.27>
     <K-POINT.28>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10364
+     12552
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.28>
     <K-POINT.29>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10362
+     12566
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.29>
     <K-POINT.30>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10340
+     12562
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.30>
     <K-POINT.31>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10340
+     12562
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.31>
     <K-POINT.32>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10360
+     12568
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.32>
     <K-POINT.33>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10364
+     12564
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.33>
     <K-POINT.34>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10364
+     12566
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.34>
     <K-POINT.35>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10356
+     12576
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.35>
     <K-POINT.36>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10360
+     12580
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.36>
     <K-POINT.37>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10372
+     12584
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.37>
     <K-POINT.38>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10366
+     12564
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.38>
     <K-POINT.39>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10378
+     12576
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.39>
     <K-POINT.40>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10382
+     12570
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.40>
     <K-POINT.41>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10372
+     12562
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.41>
     <K-POINT.42>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10364
+     12574
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.42>
     <K-POINT.43>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10344
+     12586
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.43>
     <K-POINT.44>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10346
+     12582
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.44>
     <K-POINT.45>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10318
+     12598
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.45>
     <K-POINT.46>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10326
+     12598
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.46>
     <K-POINT.47>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10338
+     12606
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.47>
     <K-POINT.48>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10342
+     12610
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.48>
     <K-POINT.49>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10368
+     12608
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.49>
     <K-POINT.50>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10350
+     12590
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.50>
     <K-POINT.51>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10354
+     12584
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.51>
     <K-POINT.52>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10350
+     12582
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.52>
     <K-POINT.53>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10346
+     12572
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.53>
     <K-POINT.54>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10358
+     12598
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.54>
     <K-POINT.55>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10370
+     12592
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.55>
     <K-POINT.56>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10356
+     12602
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.56>
     <K-POINT.57>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10360
+     12606
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.57>
     <K-POINT.58>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10356
+     12594
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.58>
     <K-POINT.59>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10354
+     12606
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.59>
     <K-POINT.60>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10368
+     12642
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.60>
     <K-POINT.61>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10368
+     12642
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.61>
     <K-POINT.62>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10350
+     12612
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.62>
     <K-POINT.63>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10360
+     12608
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.63>
     <K-POINT.64>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10360
+     12589
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.64>
     <K-POINT.65>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10350
+     12609
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.65>
     <K-POINT.66>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10364
+     12601
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.66>
     <K-POINT.67>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10346
+     12623
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.67>
     <K-POINT.68>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10338
+     12649
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.68>
     <K-POINT.69>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10328
+     12651
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.69>
     <K-POINT.70>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10354
+     12661
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.70>
     <K-POINT.71>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10344
+     12653
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.71>
     <K-POINT.72>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10338
+     12631
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.72>
     <K-POINT.73>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10324
+     12617
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.73>
     <K-POINT.74>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10310
+     12615
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.74>
     <K-POINT.75>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10326
+     12607
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.75>
     <K-POINT.76>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10326
+     12629
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.76>
     <K-POINT.77>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10302
+     12625
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.77>
     <K-POINT.78>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10296
+     12637
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.78>
     <K-POINT.79>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10258
+     12631
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.79>
     <K-POINT.80>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10276
+     12665
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.80>
     <K-POINT.81>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10288
+     12683
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.81>
     <K-POINT.82>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10289
+     12703
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.82>
     <K-POINT.83>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10295
+     12731
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.83>
     <K-POINT.84>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10301
+     12729
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.84>
     <K-POINT.85>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10325
+     12729
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.85>
     <K-POINT.86>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10339
+     12757
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.86>
     <K-POINT.87>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10357
+     12761
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.87>
     <K-POINT.88>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10363
+     12761
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.88>
     <K-POINT.89>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10369
+     12755
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.89>
     <K-POINT.90>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
-     10361
+     12735
       </NUMBER_OF_GK-VECTORS>
     </K-POINT.90>
   </EIGENVECTORS>

@@ -1,4 +1,4 @@
-#!/bin/bash/
+#!/bin/bash
 
 echo "###################################################################################################"
 echo "#                                    Lattice optimization script                                  #"
@@ -18,9 +18,9 @@ MPIRUN="mpirun.openmpi"
 ESPRESSO_PW="pw.x"
 
 # This script is meant for optimizing the lattice parameters of the crystal structure of Cu as designed.
-mkdir 2-LATT_OPT
-cp Cu.pbe.UPF 2-LATT_OPT
-cd 2-LATT_OPT
+mkdir 2-LATT_OPT-new
+cp Cu.pbe.UPF 2-LATT_OPT-new
+cd 2-LATT_OPT-new
 
 LATT="9.6 9.8 10.0 10.2 10.4 10.6 10.8"
 

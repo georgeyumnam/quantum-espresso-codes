@@ -1,0 +1,8 @@
+&DOS
+                      prefix = 'graphene' ,
+                      outdir = './' ,
+                      fildos = 'graphene.dos_without_fermi.dat' ,
+                      ngauss = 0 ,
+                     degauss = 0.003 ,
+                      DeltaE = 0.01 ,
+ /
